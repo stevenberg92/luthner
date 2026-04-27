@@ -5,49 +5,76 @@
 @layer base {
   html {
     scroll-behavior: smooth;
+    background-color: #070709;
   }
 
   body {
-    background-color: #FAFAF8;
-    color: #1A1A1A;
+    background-color: #070709;
+    color: #FAFAFA;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
   }
 
   ::selection {
-    background-color: rgba(201, 168, 76, 0.2);
-    color: #0D0D0D;
+    background-color: rgba(201, 168, 76, 0.3);
+    color: #FAFAFA;
   }
 
-  * {
-    box-sizing: border-box;
-  }
+  * { box-sizing: border-box; }
+
+  /* Hide scrollbar for horizontal scroll */
+  .scrollbar-hide::-webkit-scrollbar { display: none; }
+  .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
 }
 
 @layer utilities {
-  .hero-gradient {
-    background: linear-gradient(
-      -45deg,
-      #0a0a0a,
-      #111008,
-      #0d0d0d,
-      #15120a,
-      #0a0a0a,
-      #0f0e08
-    );
-    background-size: 400% 400%;
-    animation: heroGradient 18s ease infinite;
+  .gradient-text {
+    background: linear-gradient(135deg, #C9A84C 0%, #E8D5A3 40%, #C9A84C 80%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    background-size: 200% auto;
+    animation: shimmer 5s linear infinite;
   }
 
-  .gold-line {
-    display: inline-block;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, #C9A84C, transparent);
+  .glass {
+    background: rgba(255, 255, 255, 0.025);
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+  }
+
+  .noise {
+    position: relative;
+  }
+
+  .noise::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    opacity: 0.4;
+    z-index: 0;
+  }
+
+  .grid-bg {
+    background-image:
+      linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+    background-size: 80px 80px;
   }
 }
 
-@keyframes heroGradient {
-  0%   { background-position: 0% 50%; }
-  50%  { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+@keyframes shimmer {
+  0%   { background-position: 0% center; }
+  100% { background-position: 200% center; }
 }
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-12px); }
+}
+
+.animate-float { animation: float 6s ease-in-out infinite; }

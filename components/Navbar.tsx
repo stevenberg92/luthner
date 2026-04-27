@@ -1,115 +1,132 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
 
-const navLinks = [
+const links = [
   { label: 'Properties', href: '#properties' },
-  { label: 'About Us', href: '#about' },
-  { label: 'Services', href: '#services' },
-  { label: 'Results', href: '#results' },
-  { label: 'Contact', href: '#contact' },
+  { label: 'About',      href: '#about' },
+  { label: 'Services',   href: '#services' },
+  { label: 'Results',    href: '#results' },
 ];
 
 export default function Navbar() {
+  const [open, setOpen]       = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [menuOpen, setMenuOpen] = useState(false);
+  const { scrollYProgress }   = useScroll();
+  const width = useTransform(scrollYProgress, [0, 1], ['0%', '100%']);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 60);
-    window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
+    const fn = () => setScrolled(window.scrollY > 40);
+    window.addEventListener('scroll', fn, { passive: true });
+    return () => window.removeEventListener('scroll', fn);
   }, []);
 
   return (
-    <motion.nav
-      initial={{ opacity: 0, y: -16 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        scrolled
-          ? 'bg-dark-700/95 backdrop-blur-lg border-b border-white/5'
-          : 'bg-transparent'
-      }`}
-    >
-      <div className="max-w-7xl mx-auto px-6 lg:px-10 py-5 flex items-center justify-between">
-        {/* Logo */}
-        <a href="#" className="flex items-center gap-3 group">
-          <div className="w-8 h-8 border border-gold flex items-center justify-center transition-colors group-hover:bg-gold/10">
-            <span className="font-serif text-gold text-xs font-semibold tracking-wider">NL</span>
-          </div>
-          <span className="font-serif text-white text-lg tracking-wide">Luthner</span>
-        </a>
+    <>
+      {/* Scroll progress */}
+      <motion.div
+        className="fixed top-0 left-0 h-[2px] bg-gold z-[100] origin-left"
+        style={{ width }}
+      />
 
-        {/* Desktop Nav */}
-        <div className="hidden md:flex items-center gap-8">
-          {navLinks.map((link) => (
-            <a
-              key={link.label}
-              href={link.href}
-              className="text-white/60 hover:text-white text-sm tracking-wide transition-colors duration-200"
-            >
-              {link.label}
-            </a>
-          ))}
-          <a
-            href="#contact"
-            className="px-5 py-2.5 border border-gold text-gold text-xs tracking-widest uppercase hover:bg-gold hover:text-dark transition-all duration-300"
-          >
-            Free Consultation
+      <motion.header
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+        className={`fixed top-4 left-1/2 -translate-x-1/2 z-50 transition-all duration-500 ${
+          scrolled
+            ? 'w-[calc(100%-2rem)] max-w-5xl'
+            : 'w-[calc(100%-3rem)] max-w-6xl'
+        }`}
+      >
+        <div className={`glass rounded-full px-6 py-3.5 flex items-center justify-between transition-all duration-500 ${
+          scrolled ? 'shadow-[0_8px_40px_rgba(0,0,0,0.6)]' : ''
+        }`}>
+          {/* Logo */}
+          <a href="#" className="flex items-center gap-2.5 group">
+            <div className="w-7 h-7 border border-gold/50 rounded-sm flex items-center justify-center group-hover:border-gold transition-colors duration-300">
+              <span className="font-serif text-gold text-[0.6rem] font-semibold tracking-wider">NL</span>
+            </div>
+            <span className="font-serif text-white/90 text-sm tracking-wide">Luthner</span>
           </a>
+
+          {/* Desktop links */}
+          <nav className="hidden md:flex items-center gap-7">
+            {links.map((l) => (
+              <a
+                key={l.label}
+                href={l.href}
+                className="text-white/50 hover:text-white text-[0.8rem] tracking-wide transition-colors duration-200"
+              >
+                {l.label}
+              </a>
+            ))}
+          </nav>
+
+          {/* CTA */}
+          <div className="flex items-center gap-3">
+            <motion.a
+              href="#contact"
+              whileHover={{ scale: 1.03, backgroundColor: 'rgba(201,168,76,1)' }}
+              whileTap={{ scale: 0.97 }}
+              className="hidden md:block px-5 py-2 bg-gold/90 text-bg rounded-full font-sans text-[0.75rem] font-medium tracking-wide transition-colors duration-200"
+            >
+              Get in Touch
+            </motion.a>
+
+            {/* Mobile toggle */}
+            <button
+              onClick={() => setOpen((v) => !v)}
+              className="md:hidden w-8 h-8 flex flex-col items-center justify-center gap-[5px]"
+            >
+              <motion.span
+                animate={{ rotate: open ? 45 : 0, y: open ? 6 : 0 }}
+                className="block w-5 h-px bg-white origin-center"
+              />
+              <motion.span
+                animate={{ opacity: open ? 0 : 1 }}
+                className="block w-5 h-px bg-white"
+              />
+              <motion.span
+                animate={{ rotate: open ? -45 : 0, y: open ? -6 : 0 }}
+                className="block w-5 h-px bg-white origin-center"
+              />
+            </button>
+          </div>
         </div>
 
-        {/* Mobile Toggle */}
-        <button
-          onClick={() => setMenuOpen((o) => !o)}
-          className="md:hidden flex flex-col justify-center gap-1.5 p-1"
-          aria-label="Toggle menu"
-        >
-          <span
-            className={`block w-6 h-px bg-white transition-all duration-300 origin-center ${menuOpen ? 'rotate-45 translate-y-[5px]' : ''}`}
-          />
-          <span
-            className={`block w-6 h-px bg-white transition-all duration-300 ${menuOpen ? 'opacity-0' : ''}`}
-          />
-          <span
-            className={`block w-6 h-px bg-white transition-all duration-300 origin-center ${menuOpen ? '-rotate-45 -translate-y-[9px]' : ''}`}
-          />
-        </button>
-      </div>
-
-      {/* Mobile Menu */}
-      <AnimatePresence>
-        {menuOpen && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.3, ease: 'easeInOut' }}
-            className="md:hidden overflow-hidden bg-dark-700/98 backdrop-blur-lg border-t border-white/5"
-          >
-            <div className="px-6 py-6 flex flex-col gap-5">
-              {navLinks.map((link) => (
+        {/* Mobile menu */}
+        <AnimatePresence>
+          {open && (
+            <motion.div
+              initial={{ opacity: 0, y: -10, scale: 0.97 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: -10, scale: 0.97 }}
+              transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+              className="glass rounded-2xl mt-2 px-6 py-5 flex flex-col gap-4"
+            >
+              {links.map((l) => (
                 <a
-                  key={link.label}
-                  href={link.href}
-                  onClick={() => setMenuOpen(false)}
-                  className="text-white/70 hover:text-white text-sm tracking-wide transition-colors"
+                  key={l.label}
+                  href={l.href}
+                  onClick={() => setOpen(false)}
+                  className="text-white/60 hover:text-white text-sm tracking-wide transition-colors"
                 >
-                  {link.label}
+                  {l.label}
                 </a>
               ))}
               <a
                 href="#contact"
-                onClick={() => setMenuOpen(false)}
-                className="mt-2 px-5 py-3 border border-gold text-gold text-xs tracking-widest uppercase text-center hover:bg-gold hover:text-dark transition-all duration-300"
+                onClick={() => setOpen(false)}
+                className="mt-1 px-5 py-3 bg-gold/90 text-bg rounded-full font-sans text-sm font-medium tracking-wide text-center"
               >
-                Free Consultation
+                Get in Touch
               </a>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </motion.nav>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </motion.header>
+    </>
   );
 }

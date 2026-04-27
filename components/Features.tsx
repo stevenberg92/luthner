@@ -3,106 +3,80 @@
 import { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
 
-const features = [
+const items = [
   {
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.25} className="w-7 h-7">
-        <path strokeLinecap="round" strokeLinejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
-      </svg>
-    ),
+    num: '01',
     title: 'Fast Transactions',
-    description:
-      'We move decisively. From first viewing to closing, we operate with the speed and clarity that sellers and partners expect from a trusted investment partner.',
-    stat: '< 30 Days',
-    statLabel: 'Average closing time',
+    desc: 'We evaluate and commit within 48 hours. From first viewing to notarised closing in under 30 days — no financing delays, no broken chains.',
+    tag: '< 30 Days',
   },
   {
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.25} className="w-7 h-7">
-        <path strokeLinecap="round" strokeLinejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-      </svg>
-    ),
+    num: '02',
     title: 'Financial Strength',
-    description:
-      'Backed by solid capital reserves, we purchase without financing constraints. Our financial independence gives sellers certainty and gives us negotiating power.',
-    stat: '€2M+',
-    statLabel: 'Annual investment volume',
+    desc: 'Cash-backed acquisitions with no bank dependency. Our liquidity gives sellers certainty and puts us in a position to negotiate with confidence.',
+    tag: 'Cash Buyer',
   },
   {
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.25} className="w-7 h-7">
-        <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
-      </svg>
-    ),
-    title: 'Professional Execution',
-    description:
-      'Every project is managed with precision — from acquisition analysis and design direction to renovation oversight and premium market positioning.',
-    stat: '100%',
-    statLabel: 'Projects delivered on spec',
+    num: '03',
+    title: 'Precision Execution',
+    desc: 'In-house renovation management, bespoke design direction, and premium market positioning — every project delivered on time and on spec.',
+    tag: '100% On Spec',
   },
 ];
 
-const container = {
-  hidden: {},
-  visible: { transition: { staggerChildren: 0.15 } },
-};
-
-const card = {
-  hidden: { opacity: 0, y: 40 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.75, ease: [0.22, 1, 0.36, 1] } },
-};
-
 export default function Features() {
   const ref = useRef(null);
-  const inView = useInView(ref, { once: true, margin: '-80px' });
+  const inView = useInView(ref, { once: true, margin: '-100px' });
 
   return (
-    <section className="bg-cream py-28 px-6">
-      <div className="max-w-7xl mx-auto">
+    <section className="py-32 px-6" ref={ref}>
+      <div className="max-w-6xl mx-auto">
         {/* Header */}
         <motion.div
-          ref={ref}
           initial={{ opacity: 0, y: 30 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-          className="text-center mb-20"
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          className="mb-20"
         >
-          <div className="flex items-center justify-center gap-3 mb-4">
-            <div className="h-px w-10 bg-gold/50" />
-            <span className="font-sans text-gold text-[0.65rem] tracking-[0.3em] uppercase">Why Work With Us</span>
-            <div className="h-px w-10 bg-gold/50" />
+          <div className="flex items-center gap-3 mb-5">
+            <div className="h-px w-8 bg-gold/50" />
+            <span className="font-sans text-gold/60 text-[0.65rem] tracking-[0.35em] uppercase">Core Principles</span>
           </div>
-          <h2 className="font-serif text-dark-700 text-4xl md:text-5xl font-medium">
-            Built on Three Core Principles
+          <h2 className="font-serif text-[clamp(2.5rem,5vw,4rem)] text-white font-medium leading-tight">
+            Why serious sellers &amp;<br />
+            <span className="gradient-text italic">buyers choose us</span>
           </h2>
         </motion.div>
 
-        {/* Cards */}
-        <motion.div
-          variants={container}
-          initial="hidden"
-          animate={inView ? 'visible' : 'hidden'}
-          className="grid md:grid-cols-3 gap-6"
-        >
-          {features.map((f) => (
+        {/* Items */}
+        <div className="flex flex-col divide-y divide-white/5">
+          {items.map((item, i) => (
             <motion.div
-              key={f.title}
-              variants={card}
-              whileHover={{ y: -6, boxShadow: '0 20px 60px rgba(0,0,0,0.08)' }}
-              className="bg-white border border-cream-200 p-10 transition-all duration-400 group cursor-default"
+              key={item.num}
+              initial={{ opacity: 0, x: -30 }}
+              animate={inView ? { opacity: 1, x: 0 } : {}}
+              transition={{ delay: 0.1 + i * 0.12, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+              className="group grid md:grid-cols-[80px_1fr_auto] gap-6 md:gap-12 items-start py-10 cursor-default"
             >
-              <div className="text-gold mb-6 transition-transform duration-300 group-hover:scale-110 origin-left">
-                {f.icon}
+              <span className="font-serif text-white/10 text-5xl group-hover:text-gold/30 transition-colors duration-500">
+                {item.num}
+              </span>
+              <div>
+                <h3 className="font-serif text-white text-2xl md:text-3xl mb-3 group-hover:text-gold transition-colors duration-400">
+                  {item.title}
+                </h3>
+                <p className="font-sans text-white/40 text-sm md:text-base leading-relaxed max-w-xl">
+                  {item.desc}
+                </p>
               </div>
-              <h3 className="font-serif text-dark-700 text-2xl mb-4">{f.title}</h3>
-              <p className="font-sans text-dark-500 text-sm leading-relaxed mb-8">{f.description}</p>
-              <div className="border-t border-cream-200 pt-6">
-                <div className="font-serif text-gold text-2xl">{f.stat}</div>
-                <div className="font-sans text-dark-500/60 text-xs tracking-wide mt-1">{f.statLabel}</div>
+              <div className="hidden md:block">
+                <span className="font-sans text-[0.7rem] tracking-widest uppercase px-4 py-2 rounded-full border border-gold/25 text-gold/60 group-hover:border-gold/50 group-hover:text-gold transition-all duration-400">
+                  {item.tag}
+                </span>
               </div>
             </motion.div>
           ))}
-        </motion.div>
+        </div>
       </div>
     </section>
   );
