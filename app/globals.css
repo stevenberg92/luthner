@@ -3,78 +3,37 @@
 @tailwind utilities;
 
 @layer base {
-  html {
-    scroll-behavior: smooth;
-    background-color: #070709;
-  }
+  html { scroll-behavior: smooth; }
 
   body {
-    background-color: #070709;
-    color: #FAFAFA;
+    background-color: #FFFFFF;
+    color: #1C1C1C;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     overflow-x: hidden;
   }
 
   ::selection {
-    background-color: rgba(201, 168, 76, 0.3);
-    color: #FAFAFA;
+    background-color: rgba(26, 75, 58, 0.15);
+    color: #1C1C1C;
   }
 
   * { box-sizing: border-box; }
 
-  /* Hide scrollbar for horizontal scroll */
   .scrollbar-hide::-webkit-scrollbar { display: none; }
   .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
 }
 
 @layer utilities {
-  .gradient-text {
-    background: linear-gradient(135deg, #C9A84C 0%, #E8D5A3 40%, #C9A84C 80%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    background-size: 200% auto;
-    animation: shimmer 5s linear infinite;
+  .section-padding { @apply py-24 px-6; }
+
+  .text-balance { text-wrap: balance; }
+
+  .card-shadow {
+    box-shadow: 0 4px 24px rgba(0,0,0,0.06), 0 1px 4px rgba(0,0,0,0.04);
   }
 
-  .glass {
-    background: rgba(255, 255, 255, 0.025);
-    border: 1px solid rgba(255, 255, 255, 0.07);
-    backdrop-filter: blur(24px);
-    -webkit-backdrop-filter: blur(24px);
-  }
-
-  .noise {
-    position: relative;
-  }
-
-  .noise::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
-    pointer-events: none;
-    opacity: 0.4;
-    z-index: 0;
-  }
-
-  .grid-bg {
-    background-image:
-      linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
-    background-size: 80px 80px;
+  .card-shadow-hover {
+    box-shadow: 0 12px 40px rgba(0,0,0,0.1), 0 4px 12px rgba(0,0,0,0.06);
   }
 }
-
-@keyframes shimmer {
-  0%   { background-position: 0% center; }
-  100% { background-position: 200% center; }
-}
-
-@keyframes float {
-  0%, 100% { transform: translateY(0px); }
-  50%       { transform: translateY(-12px); }
-}
-
-.animate-float { animation: float 6s ease-in-out infinite; }

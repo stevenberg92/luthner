@@ -1,15 +1,14 @@
-import Navbar from '@/components/Navbar';
-import Hero from '@/components/Hero';
-import Features from '@/components/Features';
-import About from '@/components/About';
-import Properties from '@/components/Properties';
-import CaseStudies from '@/components/CaseStudies';
-import Services from '@/components/Services';
-import Pricing from '@/components/Pricing';
+import Navbar      from '@/components/Navbar';
+import Hero        from '@/components/Hero';
+import Trust       from '@/components/Trust';
+import Services    from '@/components/Services';
+import Properties  from '@/components/Properties';
+import HowItWorks  from '@/components/HowItWorks';
+import About       from '@/components/About';
 import Testimonials from '@/components/Testimonials';
-import LeadForm from '@/components/LeadForm';
-import FinalCTA from '@/components/FinalCTA';
-import Footer from '@/components/Footer';
+import LeadForm    from '@/components/LeadForm';
+import FinalCTA    from '@/components/FinalCTA';
+import Footer      from '@/components/Footer';
 
 export default function Home() {
   return (
@@ -17,12 +16,11 @@ export default function Home() {
       <Navbar />
       <main>
         <Hero />
-        <Features />
-        <About />
-        <Properties />
-        <CaseStudies />
+        <Trust />
         <Services />
-        <Pricing />
+        <Properties />
+        <HowItWorks />
+        <About />
         <Testimonials />
         <LeadForm />
         <FinalCTA />

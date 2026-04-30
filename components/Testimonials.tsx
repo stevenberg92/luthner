@@ -1,119 +1,91 @@
 'use client';
 
-import { useRef, useState } from 'react';
-import { motion, useInView, AnimatePresence } from 'framer-motion';
+import { useRef } from 'react';
+import { motion, useInView } from 'framer-motion';
 
 const testimonials = [
   {
-    quote: 'Nathalie and Steven made us a firm offer within 24 hours and closed without a single delay. A level of professionalism we have rarely experienced in this market.',
+    quote: 'Nathalie hat uns ein faires Angebot gemacht und den gesamten Verkaufsprozess extrem professionell abgewickelt. Kein Stress, keine Überraschungen – einfach alles wie versprochen.',
     name: 'Michael & Sandra T.',
-    role: 'Property Sellers, Munich',
-    initials: 'MS',
+    role: 'Verkäufer, München-Schwabing',
+    initials: 'MT',
   },
   {
-    quote: 'As a real estate agent, they are my first call for any off-market opportunity in the luxury segment. Fast, reliable, and genuinely pleasant to work with.',
-    name: 'Thomas Krüger',
-    role: 'Senior Real Estate Agent',
-    initials: 'TK',
+    quote: 'Als Maklerin empfehle ich Nathalie regelmäßig weiter. Sie ist schnell, verbindlich und hält jeden Termin ein. Genau die Partnerin, die man im Immobiliengeschäft braucht.',
+    name: 'Christina K.',
+    role: 'Immobilienmaklerin, München',
+    initials: 'CK',
   },
   {
-    quote: 'We purchased one of their renovated properties and were genuinely impressed. Every detail had been considered — this is not standard fix-and-flip.',
-    name: 'Jennifer M.',
-    role: 'Property Buyer, Schwabing',
-    initials: 'JM',
-  },
-  {
-    quote: 'Clear communication, realistic timelines, and a final result that exceeded our expectations. Working with Luthner felt like a true partnership.',
-    name: 'Robert & Clara B.',
-    role: 'Investment Partners',
-    initials: 'RB',
+    quote: 'Wir mussten das Elternhaus schnell verkaufen. Nathalie hat die Situation sofort verstanden, war sehr einfühlsam und hat alles diskret und zügig geregelt.',
+    name: 'Familie Bergmann',
+    role: 'Verkäufer, München-Solln',
+    initials: 'FB',
   },
 ];
+
+const stars = Array(5).fill(0);
 
 export default function Testimonials() {
   const ref    = useRef(null);
   const inView = useInView(ref, { once: true, margin: '-80px' });
-  const [active, setActive] = useState(0);
 
   return (
-    <section className="py-32 px-6" ref={ref}>
-      <div className="max-w-6xl mx-auto">
-        {/* Header */}
+    <section className="section-padding bg-white" ref={ref}>
+      <div className="max-w-7xl mx-auto">
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 24 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-          className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-16"
+          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+          className="text-center mb-14"
         >
-          <div>
-            <div className="flex items-center gap-3 mb-5">
-              <div className="h-px w-8 bg-gold/50" />
-              <span className="font-sans text-gold/60 text-[0.65rem] tracking-[0.35em] uppercase">Testimonials</span>
-            </div>
-            <h2 className="font-serif text-[clamp(2.5rem,5vw,4rem)] text-white font-medium">
-              What our partners<br />
-              <span className="gradient-text italic">say about us</span>
-            </h2>
-          </div>
-
-          {/* Dots */}
-          <div className="flex gap-2">
-            {testimonials.map((_, i) => (
-              <button
-                key={i}
-                onClick={() => setActive(i)}
-                className={`transition-all duration-300 rounded-full ${
-                  i === active ? 'w-8 h-2 bg-gold' : 'w-2 h-2 bg-white/15 hover:bg-white/30'
-                }`}
-              />
+          <span className="inline-block font-sans text-primary text-xs tracking-[0.3em] uppercase font-medium mb-4">
+            Erfahrungen
+          </span>
+          <h2 className="font-serif text-[clamp(2rem,4vw,3.2rem)] text-text font-medium mb-4">
+            Was meine Kunden sagen
+          </h2>
+          <div className="flex items-center justify-center gap-1 mt-3">
+            {stars.map((_, i) => (
+              <svg key={i} className="w-5 h-5 text-gold" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+              </svg>
             ))}
+            <span className="font-sans text-text-muted text-sm ml-2">5.0 · Kundenbewertung</span>
           </div>
         </motion.div>
 
-        {/* Active testimonial — large format */}
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={active}
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-            className="glass rounded-2xl p-10 md:p-14 mb-6"
-          >
-            <div className="font-serif text-gold/15 text-8xl leading-none mb-4 select-none">&ldquo;</div>
-            <p className="font-serif text-white text-xl md:text-2xl leading-relaxed mb-10 max-w-3xl">
-              {testimonials[active].quote}
-            </p>
-            <div className="flex items-center gap-4">
-              <div className="w-10 h-10 rounded-full bg-gold/10 border border-gold/20 flex items-center justify-center flex-shrink-0">
-                <span className="font-serif text-gold text-xs">{testimonials[active].initials}</span>
-              </div>
-              <div>
-                <p className="font-serif text-white text-sm">{testimonials[active].name}</p>
-                <p className="font-sans text-white/30 text-xs tracking-wide mt-0.5">{testimonials[active].role}</p>
-              </div>
-            </div>
-          </motion.div>
-        </AnimatePresence>
-
-        {/* Thumbnail row */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div className="grid md:grid-cols-3 gap-6">
           {testimonials.map((t, i) => (
-            <motion.button
+            <motion.div
               key={t.name}
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 32 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ delay: 0.1 + i * 0.08, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-              onClick={() => setActive(i)}
-              className={`text-left p-4 rounded-xl border transition-all duration-300 ${
-                i === active
-                  ? 'border-gold/30 bg-gold/5'
-                  : 'border-white/5 glass hover:border-white/15'
-              }`}
+              transition={{ delay: i * 0.12, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+              whileHover={{ y: -5 }}
+              className="bg-warm-50 border border-warm-200 rounded-2xl p-7 flex flex-col hover:border-primary/20 transition-all duration-300 card-shadow-hover"
             >
-              <p className="font-serif text-white/60 text-sm mb-2 truncate">{t.name}</p>
-              <p className="font-sans text-white/25 text-xs">{t.role}</p>
-            </motion.button>
+              {/* Stars */}
+              <div className="flex gap-0.5 mb-5">
+                {stars.map((_, si) => (
+                  <svg key={si} className="w-4 h-4 text-gold" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                  </svg>
+                ))}
+              </div>
+              <p className="font-sans text-text-muted text-[0.95rem] leading-relaxed mb-6 flex-1">
+                &ldquo;{t.quote}&rdquo;
+              </p>
+              <div className="flex items-center gap-3 border-t border-warm-200 pt-5">
+                <div className="w-9 h-9 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+                  <span className="font-serif text-primary text-xs font-semibold">{t.initials}</span>
+                </div>
+                <div>
+                  <p className="font-serif text-text text-sm">{t.name}</p>
+                  <p className="font-sans text-text-light text-xs mt-0.5">{t.role}</p>
+                </div>
+              </div>
+            </motion.div>
           ))}
         </div>
       </div>

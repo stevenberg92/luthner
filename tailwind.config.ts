@@ -9,23 +9,31 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        bg:      '#070709',
-        surface: '#0F0F13',
+        primary: {
+          DEFAULT: '#1A4B3A',
+          dark:    '#122E24',
+          light:   '#2A6B54',
+        },
         gold: {
           DEFAULT: '#C9A84C',
           light:   '#E8D5A3',
           dark:    '#A08030',
         },
-        border: 'rgba(255,255,255,0.07)',
+        warm: {
+          50:  '#FDFCF9',
+          100: '#F7F5F0',
+          200: '#EDE9E0',
+          300: '#DDD9CF',
+        },
+        text: {
+          DEFAULT: '#1C1C1C',
+          muted:   '#6B6B6B',
+          light:   '#9B9B9B',
+        },
       },
       fontFamily: {
         serif: ['var(--font-playfair)', 'Georgia', 'serif'],
         sans:  ['var(--font-inter)',    'system-ui', 'sans-serif'],
-      },
-      fontSize: {
-        '8xl':  ['6rem',  { lineHeight: '1' }],
-        '9xl':  ['8rem',  { lineHeight: '1' }],
-        '10xl': ['10rem', { lineHeight: '1' }],
       },
       transitionTimingFunction: {
         'expo-out': 'cubic-bezier(0.16, 1, 0.3, 1)',
