@@ -2,6 +2,7 @@
 
 import { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
+import ScrollReveal from './ScrollReveal';
 
 const steps = [
   {
@@ -54,23 +55,34 @@ export default function HowItWorks() {
   return (
     <section id="ablauf" className="section-padding bg-white" ref={ref}>
       <div className="max-w-7xl mx-auto">
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-          className="text-center mb-16"
-        >
-          <span className="inline-block font-sans text-primary text-xs tracking-[0.3em] uppercase font-medium mb-4">
+        <div className="mb-16">
+          <motion.span
+            initial={{ opacity: 0 }}
+            animate={inView ? { opacity: 1 } : {}}
+            transition={{ duration: 0.6 }}
+            className="inline-block font-sans text-primary text-xs tracking-[0.3em] uppercase font-medium mb-6"
+          >
             Für Verkäufer
-          </span>
-          <h2 className="font-serif text-[clamp(2rem,4vw,3.2rem)] text-text font-medium mb-4">
-            So einfach verkaufen Sie Ihre Immobilie
-          </h2>
-          <p className="font-sans text-text-muted text-base max-w-lg mx-auto leading-relaxed">
-            Kein Stress, keine Wartezeiten, keine Überraschungen – nur ein klarer,
-            persönlicher Prozess von A bis Z.
-          </p>
-        </motion.div>
+          </motion.span>
+          <div className="grid md:grid-cols-[1fr_2fr] gap-10 md:gap-20 items-end">
+            <ScrollReveal
+              as="h2"
+              className="font-serif text-[clamp(2rem,4vw,3.2rem)] font-medium leading-[1.1] tracking-tight"
+              baseColor="#D4D0C8"
+              highlightColor="#1C1C1C"
+            >
+              So einfach verkaufen Sie Ihre Immobilie.
+            </ScrollReveal>
+            <ScrollReveal
+              as="p"
+              className="font-sans text-base leading-relaxed"
+              baseColor="#C8C4BC"
+              highlightColor="#6B6B6B"
+            >
+              Kein Stress, keine Wartezeiten, keine Überraschungen – nur ein klarer, persönlicher Prozess von A bis Z.
+            </ScrollReveal>
+          </div>
+        </div>
 
         {/* Steps */}
         <div className="grid md:grid-cols-4 gap-6 md:gap-4 relative">
@@ -85,10 +97,13 @@ export default function HowItWorks() {
               transition={{ delay: i * 0.12, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
               className="relative z-10 flex flex-col items-center text-center"
             >
-              {/* Icon circle */}
-              <div className="w-14 h-14 rounded-full bg-primary/8 border-4 border-white flex items-center justify-center text-primary mb-5 ring-2 ring-warm-200">
+              <motion.div
+                whileHover={{ scale: 1.1, backgroundColor: 'rgba(26,75,58,0.12)' }}
+                transition={{ duration: 0.25 }}
+                className="w-14 h-14 rounded-full bg-primary/8 border-4 border-white flex items-center justify-center text-primary mb-5 ring-2 ring-warm-200"
+              >
                 {s.icon}
-              </div>
+              </motion.div>
               <span className="font-sans text-primary text-[0.65rem] tracking-[0.3em] uppercase font-medium mb-2">{s.num}</span>
               <h3 className="font-serif text-text text-xl mb-3">{s.title}</h3>
               <p className="font-sans text-text-muted text-sm leading-relaxed">{s.desc}</p>
@@ -96,20 +111,28 @@ export default function HowItWorks() {
           ))}
         </div>
 
-        {/* CTA */}
+        {/* Arrow scroll cue + CTA */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ delay: 0.5, duration: 0.7 }}
+          transition={{ delay: 0.55, duration: 0.7 }}
           className="text-center mt-14"
         >
           <motion.a
             href="#kontakt"
             whileHover={{ scale: 1.03, boxShadow: '0 8px 30px rgba(26,75,58,0.25)' }}
             whileTap={{ scale: 0.97 }}
-            className="inline-block px-8 py-4 bg-primary text-white font-sans text-sm font-semibold rounded-full hover:bg-primary-dark transition-colors duration-300"
+            className="inline-flex items-center gap-3 px-8 py-4 bg-primary text-white font-sans text-sm font-semibold rounded-full hover:bg-primary-dark transition-colors duration-300"
           >
             Jetzt kostenfrei anfragen
+            <motion.svg
+              className="w-4 h-4"
+              fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24"
+              animate={{ x: [0, 4, 0] }}
+              transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+            </motion.svg>
           </motion.a>
         </motion.div>
       </div>

@@ -2,6 +2,7 @@
 
 import { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
+import ScrollReveal from './ScrollReveal';
 
 const services = [
   {
@@ -50,23 +51,34 @@ export default function Services() {
   return (
     <section id="leistungen" ref={ref} className="section-padding bg-white">
       <div className="max-w-7xl mx-auto">
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-          className="text-center mb-16"
-        >
-          <span className="inline-block font-sans text-primary text-xs tracking-[0.3em] uppercase font-medium mb-4">
+        <div className="mb-16">
+          <motion.span
+            initial={{ opacity: 0 }}
+            animate={inView ? { opacity: 1 } : {}}
+            transition={{ duration: 0.6 }}
+            className="inline-block font-sans text-primary text-xs tracking-[0.3em] uppercase font-medium mb-6"
+          >
             Leistungen
-          </span>
-          <h2 className="font-serif text-[clamp(2rem,4vw,3.2rem)] text-text font-medium mb-4">
-            Was ich für Sie tun kann
-          </h2>
-          <p className="font-sans text-text-muted text-base max-w-xl mx-auto leading-relaxed">
-            Ob Direktverkauf, sanierungsbedürftiges Objekt oder Premiumwohnung –
-            ich finde die passende Lösung für Ihre Situation.
-          </p>
-        </motion.div>
+          </motion.span>
+          <div className="grid md:grid-cols-[1fr_2fr] gap-10 md:gap-20 items-end">
+            <ScrollReveal
+              as="h2"
+              className="font-serif text-[clamp(2rem,4vw,3.2rem)] text-text font-medium leading-[1.1] tracking-tight"
+              baseColor="#D4D0C8"
+              highlightColor="#1C1C1C"
+            >
+              Was ich für Sie tun kann.
+            </ScrollReveal>
+            <ScrollReveal
+              as="p"
+              className="font-sans text-base leading-relaxed"
+              baseColor="#C8C4BC"
+              highlightColor="#6B6B6B"
+            >
+              Ob Direktverkauf, sanierungsbedürftiges Objekt oder Premiumwohnung – ich finde die passende Lösung für Ihre Situation.
+            </ScrollReveal>
+          </div>
+        </div>
 
         <div className="grid md:grid-cols-3 gap-6">
           {services.map((s, i) => (
