@@ -4,47 +4,46 @@ import { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
 import ScrollReveal from './ScrollReveal';
 
-const steps = [
+const advantages = [
   {
-    num: '01',
-    title: 'Kontakt aufnehmen',
-    desc: 'Füllen Sie das Formular aus oder rufen Sie mich an. Ich melde mich innerhalb von 24 Stunden persönlich bei Ihnen.',
-    icon: (
-      <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth={1.75} viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z" />
-      </svg>
-    ),
+    title: 'Regionale Marktkenntnis',
+    desc: 'Wir kennen Norderstedt, Hamburg und das Umland – und wissen, was Ihre Immobilie wirklich wert ist.',
+    icon: 'M15 10.5a3 3 0 11-6 0 3 3 0 016 0z M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z',
   },
   {
-    num: '02',
-    title: 'Kostenlose Besichtigung',
-    desc: 'Ich besichtige Ihre Immobilie persönlich – schnell, unkompliziert und ohne Verpflichtungen für Sie.',
-    icon: (
-      <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth={1.75} viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" />
-        <path strokeLinecap="round" strokeLinejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-      </svg>
-    ),
+    title: 'Persönliche Betreuung',
+    desc: 'Ein fester Ansprechpartner, der erreichbar ist und Sie über jeden Schritt informiert.',
+    icon: 'M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z',
   },
   {
-    num: '03',
-    title: 'Faires Angebot in 48h',
-    desc: 'Sie erhalten ein transparentes, faires Kaufangebot – ohne versteckte Kosten, ohne Druck und ohne Maklergebühren.',
-    icon: (
-      <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth={1.75} viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
-      </svg>
-    ),
+    title: 'Schnelle Vermarktung',
+    desc: 'Strukturierte Abläufe und ein klarer Plan sorgen für einen zügigen, reibungslosen Verkauf.',
+    icon: 'M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z',
   },
   {
-    num: '04',
-    title: 'Notartermin & Übergabe',
-    desc: 'Nach Ihrer Zusage kümmere ich mich um alles. Notartermin, Finanzierung, Übergabe – schnell und stressfrei.',
-    icon: (
-      <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth={1.75} viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-      </svg>
-    ),
+    title: 'Qualifizierte Interessenten',
+    desc: 'Wir filtern vor und führen Besichtigungen nur mit ernsthaften, geprüften Kaufinteressenten.',
+    icon: 'M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z',
+  },
+  {
+    title: 'Hochwertige Präsentation',
+    desc: 'Professionelle Fotos, Videos und Exposés, die Ihre Immobilie ins beste Licht rücken.',
+    icon: 'M6.827 6.175A2.31 2.31 0 015.186 7.23c-.38.054-.757.112-1.134.175C2.999 7.58 2.25 8.507 2.25 9.574V18a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 18V9.574c0-1.067-.75-1.994-1.802-2.169a47.865 47.865 0 00-1.134-.175 2.31 2.31 0 01-1.64-1.055l-.822-1.316a2.192 2.192 0 00-1.736-1.039 48.774 48.774 0 00-5.232 0 2.192 2.192 0 00-1.736 1.039l-.821 1.316z M16.5 12.75a4.5 4.5 0 11-9 0 4.5 4.5 0 019 0z',
+  },
+  {
+    title: 'Starkes Netzwerk',
+    desc: 'Beste Verbindungen zu Behörden, Ämtern, Handwerkern und Baufachbereichen.',
+    icon: 'M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a3 3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197M15 6.75a3 3 0 11-6 0 3 3 0 016 0zm6 3a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0zm-13.5 0a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z',
+  },
+  {
+    title: 'Transparente Kommunikation',
+    desc: 'Klare Aussagen, ehrliche Einschätzungen und keine versteckten Kosten – jederzeit.',
+    icon: 'M8.625 12a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375M21 12c0 4.556-4.03 8.25-9 8.25a9.764 9.764 0 01-2.555-.337A5.972 5.972 0 015.41 20.97a5.969 5.969 0 01-.474-.065 4.48 4.48 0 00.978-2.025c.09-.457-.133-.901-.467-1.226C3.93 16.178 3 14.189 3 12c0-4.556 4.03-8.25 9-8.25s9 3.694 9 8.25z',
+  },
+  {
+    title: 'Rundum-Service',
+    desc: 'Von der Bewertung bis zum Notartermin – alles aus einer Hand, ganz ohne Ihre „Lauferei“.',
+    icon: 'M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z',
   },
 ];
 
@@ -53,65 +52,58 @@ export default function HowItWorks() {
   const inView = useInView(ref, { once: true, margin: '-80px' });
 
   return (
-    <section id="ablauf" className="section-padding bg-white" ref={ref}>
+    <section id="vorteile" className="section-padding bg-white" ref={ref}>
       <div className="max-w-7xl mx-auto">
         <div className="mb-16">
           <motion.span
             initial={{ opacity: 0 }}
             animate={inView ? { opacity: 1 } : {}}
             transition={{ duration: 0.6 }}
-            className="inline-block font-sans text-primary text-xs tracking-[0.3em] uppercase font-medium mb-6"
+            className="inline-block font-sans text-gold text-xs tracking-[0.3em] uppercase font-medium mb-6"
           >
-            Für Verkäufer
+            Vorteile
           </motion.span>
           <div className="grid md:grid-cols-[1fr_2fr] gap-10 md:gap-20 items-end">
             <ScrollReveal
               as="h2"
               className="font-serif text-[clamp(2rem,4vw,3.2rem)] font-medium leading-[1.1] tracking-tight"
-              baseColor="#D4D0C8"
-              highlightColor="#1C1C1C"
+              baseColor="#D6CFBE"
+              highlightColor="#1A1A19"
             >
-              So einfach verkaufen Sie Ihre Immobilie.
+              Warum Eigentümer uns vertrauen.
             </ScrollReveal>
             <ScrollReveal
               as="p"
               className="font-sans text-base leading-relaxed"
-              baseColor="#C8C4BC"
-              highlightColor="#6B6B6B"
+              baseColor="#CFC8B6"
+              highlightColor="#67655E"
             >
-              Kein Stress, keine Wartezeiten, keine Überraschungen – nur ein klarer, persönlicher Prozess von A bis Z.
+              Erfahrung, Erreichbarkeit und ein starkes regionales Netzwerk – darauf bauen unsere Kunden seit Jahrzehnten.
             </ScrollReveal>
           </div>
         </div>
 
-        {/* Steps */}
-        <div className="grid md:grid-cols-4 gap-6 md:gap-4 relative">
-          {/* Connecting line */}
-          <div className="hidden md:block absolute top-12 left-[12.5%] right-[12.5%] h-px bg-warm-200 z-0" />
-
-          {steps.map((s, i) => (
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+          {advantages.map((a, i) => (
             <motion.div
-              key={s.num}
+              key={a.title}
               initial={{ opacity: 0, y: 32 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ delay: i * 0.12, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-              className="relative z-10 flex flex-col items-center text-center"
+              transition={{ delay: (i % 4) * 0.08 + Math.floor(i / 4) * 0.12, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+              whileHover={{ y: -5 }}
+              className="rounded-2xl bg-warm-50 border border-warm-200 p-6 hover:border-gold/40 transition-all duration-300"
             >
-              <motion.div
-                whileHover={{ scale: 1.1, backgroundColor: 'rgba(26,75,58,0.12)' }}
-                transition={{ duration: 0.25 }}
-                className="w-14 h-14 rounded-full bg-primary/8 border-4 border-white flex items-center justify-center text-primary mb-5 ring-2 ring-warm-200"
-              >
-                {s.icon}
-              </motion.div>
-              <span className="font-sans text-primary text-[0.65rem] tracking-[0.3em] uppercase font-medium mb-2">{s.num}</span>
-              <h3 className="font-serif text-text text-xl mb-3">{s.title}</h3>
-              <p className="font-sans text-text-muted text-sm leading-relaxed">{s.desc}</p>
+              <div className="inline-flex w-11 h-11 items-center justify-center rounded-xl bg-gold/12 text-gold-dark mb-5">
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth={1.5} viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" d={a.icon} />
+                </svg>
+              </div>
+              <h3 className="font-serif text-text text-lg mb-2">{a.title}</h3>
+              <p className="font-sans text-text-muted text-sm leading-relaxed">{a.desc}</p>
             </motion.div>
           ))}
         </div>
 
-        {/* Arrow scroll cue + CTA */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
@@ -120,11 +112,11 @@ export default function HowItWorks() {
         >
           <motion.a
             href="#kontakt"
-            whileHover={{ scale: 1.03, boxShadow: '0 8px 30px rgba(26,75,58,0.25)' }}
+            whileHover={{ scale: 1.03, boxShadow: '0 8px 30px rgba(0,0,0,0.18)' }}
             whileTap={{ scale: 0.97 }}
             className="inline-flex items-center gap-3 px-8 py-4 bg-primary text-white font-sans text-sm font-semibold rounded-full hover:bg-primary-dark transition-colors duration-300"
           >
-            Jetzt kostenfrei anfragen
+            Jetzt unverbindlich anfragen
             <motion.svg
               className="w-4 h-4"
               fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24"

@@ -6,8 +6,9 @@ const playfair = Playfair_Display({ subsets: ['latin'], variable: '--font-playfa
 const inter    = Inter({ subsets: ['latin'], variable: '--font-inter' });
 
 export const metadata: Metadata = {
-  title: 'Nathalie Luthner – Immobilieninvestorin München',
-  description: 'Fix & Flip Investorin aus München. Ich kaufe Ihre Immobilie schnell, diskret und zu fairen Konditionen – ohne Makler, ohne Wartezeiten.',
+  title: 'MBI Bormann Immobilien – Ihr Immobilienmakler für Norderstedt & Hamburg',
+  description:
+    'MBI Bormann Immobilien Vermittlungsgesellschaft mbH – persönliche Beratung, professionelle Vermarktung und Rundum-Service für Verkäufer, Käufer, Mieter und Vermieter in Norderstedt, Hamburg und Umgebung.',
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

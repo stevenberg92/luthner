@@ -9,26 +9,29 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
+        // Clean Luxury — charcoal / near-black as primary accent
         primary: {
-          DEFAULT: '#1A4B3A',
-          dark:    '#122E24',
-          light:   '#2A6B54',
+          DEFAULT: '#1B1B1A',
+          dark:    '#000000',
+          light:   '#3A3A38',
         },
+        // Warm bronze / beige accent
         gold: {
-          DEFAULT: '#C9A84C',
-          light:   '#E8D5A3',
-          dark:    '#A08030',
+          DEFAULT: '#B0915F',
+          light:   '#D8C3A0',
+          dark:    '#8A6F43',
         },
+        // Soft beige & warm greys
         warm: {
-          50:  '#FDFCF9',
-          100: '#F7F5F0',
-          200: '#EDE9E0',
-          300: '#DDD9CF',
+          50:  '#FBFAF7',
+          100: '#F4F1EA',
+          200: '#E8E3D7',
+          300: '#D6CFBE',
         },
         text: {
-          DEFAULT: '#1C1C1C',
-          muted:   '#6B6B6B',
-          light:   '#9B9B9B',
+          DEFAULT: '#1A1A19',
+          muted:   '#67655E',
+          light:   '#9C988D',
         },
       },
       fontFamily: {

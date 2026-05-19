@@ -10,11 +10,9 @@ export default function Intro() {
 
   return (
     <section ref={ref} className="relative bg-white py-32 md:py-44 px-6 overflow-hidden">
-      {/* Subtle cloud wisp at top — continuation from Hero */}
-      <div className="absolute top-0 inset-x-0 h-32 bg-gradient-to-b from-warm-50/50 to-transparent pointer-events-none" />
+      <div className="absolute top-0 inset-x-0 h-32 bg-gradient-to-b from-warm-50/60 to-transparent pointer-events-none" />
 
       <div className="max-w-7xl mx-auto grid md:grid-cols-[1fr_3fr] gap-10 md:gap-20 items-start">
-        {/* Sidebar label */}
         <motion.div
           initial={{ opacity: 0, x: -20 }}
           animate={inView ? { opacity: 1, x: 0 } : {}}
@@ -22,31 +20,30 @@ export default function Intro() {
           className="md:sticky md:top-32"
         >
           <div className="flex items-center gap-3">
-            <div className="h-px w-8 bg-primary" />
+            <div className="h-px w-8 bg-gold" />
             <span className="font-sans text-text-muted text-xs tracking-[0.3em] uppercase">
-              Warum Nathalie
+              Unser Versprechen
             </span>
           </div>
         </motion.div>
 
-        {/* Big scroll-reveal text */}
         <div>
           <ScrollReveal
             as="h2"
             className="font-serif text-[clamp(2rem,4.5vw,3.8rem)] font-medium leading-[1.15] tracking-tight"
-            baseColor="#D4D0C8"
-            highlightColor="#1C1C1C"
+            baseColor="#D6CFBE"
+            highlightColor="#1A1A19"
           >
-            Ihre Immobilie verdient mehr als ein Schild im Garten.
+            Immobilienverkauf ist Vertrauenssache.
           </ScrollReveal>
           <div className="mt-8">
             <ScrollReveal
               as="p"
-              className="font-sans text-[clamp(1.1rem,1.6vw,1.5rem)] leading-relaxed"
-              baseColor="#D4D0C8"
-              highlightColor="#6B6B6B"
+              className="font-sans text-[clamp(1.05rem,1.6vw,1.45rem)] leading-relaxed"
+              baseColor="#D6CFBE"
+              highlightColor="#67655E"
             >
-              Ich kaufe direkt – ohne Makler, ohne Provision, ohne Besichtigungsmarathon. Persönlich, fair und immer auf Augenhöhe.
+              Seit vielen Jahrzehnten steht unser Name für persönliche Beratung und zuverlässigen Service. Über die Hälfte unserer Neukunden kommt über Empfehlungen früherer zufriedener Kunden – Kompetenz, Individualität und Leidenschaft sind die Basis unseres Erfolgs.
             </ScrollReveal>
           </div>
         </div>

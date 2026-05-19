@@ -5,43 +5,37 @@ import { motion, useInView, useScroll, useTransform } from 'framer-motion';
 
 const properties = [
   {
-    gradient: 'from-slate-700 via-stone-600 to-slate-800',
-    accent: 'rgba(201,168,76,0.12)',
-    status: 'Verkauft',
-    statusStyle: 'bg-green-100 text-green-700',
-    title: 'Penthouse Schwabing',
-    location: 'München-Schwabing',
-    area: '320 m²',
-    rooms: '6 Zimmer',
-    price: '€ 1.285.000',
-    roi: '+56% ROI',
-    desc: 'Vollständig saniertes Stadtpalais aus den 1920er Jahren mit exklusiver Innenausstattung.',
-  },
-  {
-    gradient: 'from-zinc-700 via-stone-600 to-neutral-800',
-    accent: 'rgba(255,255,255,0.04)',
-    status: 'In Renovierung',
-    statusStyle: 'bg-amber-100 text-amber-700',
-    title: 'Penthouse Maxvorstadt',
-    location: 'München-Maxvorstadt',
-    area: '218 m²',
-    rooms: '4 Zimmer',
-    price: '€ 960.000',
-    roi: 'Est. +48%',
-    desc: 'Dachgeschosswohnung mit Panoramablick – aktuell in hochwertiger Kernsanierung.',
-  },
-  {
-    gradient: 'from-stone-700 via-zinc-600 to-stone-800',
-    accent: 'rgba(201,168,76,0.08)',
-    status: 'Demnächst',
-    statusStyle: 'bg-blue-100 text-blue-700',
-    title: 'Townhouse Bogenhausen',
-    location: 'München-Bogenhausen',
-    area: '185 m²',
+    image: 'https://images.unsplash.com/photo-1568605114967-8130f3a36994?auto=format&fit=crop&w=1200&q=80',
+    status: 'Verfügbar',
+    statusStyle: 'bg-warm-100 text-primary',
+    title: 'Stilvolles Endreihenhaus',
+    location: 'Norderstedt-Friedrichsgabe',
+    area: 'ca. 137 m²',
     rooms: '5 Zimmer',
+    price: '€ 598.000',
+    desc: 'Gepflegtes Endreihenhaus in ruhiger, familienfreundlicher Lage – bezugsfertig und mit eigenem Garten.',
+  },
+  {
+    image: 'https://images.unsplash.com/photo-1570129477492-45c003edd2be?auto=format&fit=crop&w=1200&q=80',
+    status: 'Neu im Angebot',
+    statusStyle: 'bg-gold/15 text-gold-dark',
+    title: 'Kompaktes Einfamilienhaus',
+    location: 'Norderstedt-Harksheide',
+    area: 'ca. 60 m² + 50 m² Nutzfl.',
+    rooms: '3 Zimmer',
+    price: '€ 328.000',
+    desc: 'Charmantes Einfamilienhaus mit zusätzlicher Nutzfläche – ideal für Paare oder als Kapitalanlage.',
+  },
+  {
+    image: 'https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?auto=format&fit=crop&w=1200&q=80',
+    status: 'Exklusiv',
+    statusStyle: 'bg-primary text-white',
+    title: 'Elegante Jugendstilwohnung',
+    location: 'Hamburg-Rahlstedt',
+    area: 'ca. 94 m²',
+    rooms: '3 Zimmer',
     price: 'Auf Anfrage',
-    roi: '',
-    desc: 'Elegantes Stadthaus im exklusivsten Wohnviertel Münchens – vollständige Sanierung geplant.',
+    desc: 'Hochwertige Altbauwohnung mit Stuck, Dielen und großzügigem Schnitt in begehrter Lage.',
   },
 ];
 
@@ -59,37 +53,27 @@ function PropertyCard({ p, index }: { p: typeof properties[0]; index: number }) 
       initial={{ opacity: 0, y: 40 }}
       animate={inView ? { opacity: 1, y: 0 } : {}}
       transition={{ delay: index * 0.12, duration: 0.75, ease: [0.16, 1, 0.3, 1] }}
-      className="group rounded-2xl overflow-hidden card-shadow hover:card-shadow-hover transition-all duration-400 bg-white"
+      whileHover={{ y: -6 }}
+      className="group rounded-2xl overflow-hidden card-shadow hover:card-shadow-hover transition-all duration-300 bg-white"
     >
-      {/* Parallax image */}
       <div ref={ref} className="relative h-64 overflow-hidden">
         <motion.div
-          style={{ y: imgY }}
-          className={`absolute inset-[-15%] bg-gradient-to-br ${p.gradient}`}
+          style={{ y: imgY, backgroundImage: `url('${p.image}')` }}
+          className="absolute inset-[-15%] bg-cover bg-center"
         >
-          <div style={{ background: `radial-gradient(ellipse at 60% 40%, ${p.accent}, transparent 60%)` }} className="absolute inset-0" />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/35 to-transparent" />
         </motion.div>
 
-        {/* Overlays */}
         <div className="absolute top-4 left-4 z-10">
           <span className={`font-sans text-xs font-medium px-3 py-1.5 rounded-full ${p.statusStyle}`}>
             {p.status}
           </span>
         </div>
-        {p.roi && (
-          <div className="absolute top-4 right-4 z-10">
-            <span className="font-sans text-xs font-semibold px-3 py-1.5 rounded-full bg-primary text-white">
-              {p.roi}
-            </span>
-          </div>
-        )}
       </div>
 
-      {/* Info */}
       <div className="p-6">
         <div className="flex items-start justify-between gap-3 mb-1">
-          <h3 className="font-serif text-text text-xl group-hover:text-primary transition-colors duration-300">{p.title}</h3>
+          <h3 className="font-serif text-text text-xl group-hover:text-gold-dark transition-colors duration-300">{p.title}</h3>
           <span className="font-sans text-text-light text-xs bg-warm-100 px-2.5 py-1 rounded-full flex-shrink-0">{p.area}</span>
         </div>
         <div className="flex items-center gap-2 mb-3">
@@ -103,7 +87,7 @@ function PropertyCard({ p, index }: { p: typeof properties[0]; index: number }) 
         <div className="flex items-center justify-between border-t border-warm-200 pt-4">
           <span className="font-serif text-text text-lg font-medium">{p.price}</span>
           <motion.a href="#kontakt" whileHover={{ x: 3 }}
-            className="font-sans text-primary text-sm font-medium hover:text-primary-dark transition-colors flex items-center gap-1.5">
+            className="font-sans text-gold-dark text-sm font-medium hover:text-primary transition-colors flex items-center gap-1.5">
             Details anfragen
             <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/>
@@ -130,15 +114,15 @@ export default function Properties() {
           className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-14"
         >
           <div>
-            <span className="inline-block font-sans text-primary text-xs tracking-[0.3em] uppercase font-medium mb-3">
-              Portfolio
+            <span className="inline-block font-sans text-gold text-xs tracking-[0.3em] uppercase font-medium mb-3">
+              Aktuelles Angebot
             </span>
             <h2 className="font-serif text-[clamp(2rem,4vw,3.2rem)] text-text font-medium">
-              Aktuelle Objekte
+              Top Immobilien
             </h2>
           </div>
-          <a href="#kontakt" className="font-sans text-primary text-sm font-medium border-b border-primary/30 pb-0.5 hover:border-primary transition-colors self-start md:self-auto">
-            Off-Market Deals anfragen →
+          <a href="#kontakt" className="font-sans text-gold-dark text-sm font-medium border-b border-gold/40 pb-0.5 hover:border-gold transition-colors self-start md:self-auto">
+            Weitere Immobilien ansehen →
           </a>
         </motion.div>
 
